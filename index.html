@@ -47776,7 +47776,6 @@ function displayBikes(bikes) {
                     <p><strong>Max Power:</strong> ${bike["Max Power"]}</p>
                     <p class="price-tag">${bike["price"]}</p>
                     <button onclick="showMore('${key}')" class="see-more-btn">See More</button>
-                    <button onclick="addToFavorites('${key}')" class="favorite-btn">Favorite</button>
                     <div class="hidden-details" id="${key}-details"></div>
                 </div>
             `;
@@ -47812,20 +47811,6 @@ function showMore(key) {
     `;
     detailsContainer.classList.toggle('show');
 }
-
-// Function to add to favorites
-function addToFavorites(key) {
-    alert(`Bike ${formatName(key)} added to favorites!`);
-    // Implement additional logic to actually save the favorite in localStorage or a database.
-}
-
-function addToFavorites(key) {
-    // Save the selected bike's data to localStorage
-    localStorage.setItem('favoriteBike', JSON.stringify(bikesData[key]));
-    // Route to the favorite bike details page
-    window.location.href = `favorite.html?bike=${key}`;
-}
-
 
 // Function to shuffle an array (Fisher-Yates Shuffle)
 function shuffle(array) {
