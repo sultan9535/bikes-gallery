@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Bikes</title>
+    <style>
+        /* Basic styles for bike cards */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #bikesContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        .bike-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative; /* Added for positioning */
+        }
+        .bike-card:hover {
+            transform: scale(1.05);
+        }
+        .bike-image img {
+            width: 100%;
+            height: auto;
+        }
+        .bike-details {
+            padding: 15px;
+        }
+        .bike-details h3 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+        }
+        .bike-details p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .price-tag {
+            color: #e74c3c;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .remove-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #791207; /* Red color for remove button */
+            color: #fff;
+            font-size: 0.8em;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .remove-btn:hover {
+            background-color: #c07a2b; /* Darker red on hover */
+        }
+        .hidden-details {
+            display: none;
+            margin-top: 10px;
+            color: #910505;
+        }
+        /*nav bar*/
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#D3D3D3;
+    padding: 10px 20px;
+    color: rgb(155, 33, 33);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: calc(100% - 80px);
+    margin-left: 20px;
+    top: 0;
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+    font-family:  "Arsenal SC", sans-serif;
+}
+#user{
+    color: rgb(223, 59, 59);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    margin-top: 7px;
+}
+#user:hover{
+    text-decoration: underline;
+}
+
+.nav-link:hover {
+    background-color: grey;
+}
+main {
+    margin-top: 50px;
+}
+/*footer styling*/
+.footer {
+    background-color: rgb(15, 55, 107);
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+/* Styling for the first row of links */
+#one {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Adjusted for equal spacing */
+    padding-bottom: 20px;
+}
+
+#first {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Headings for sections */
+#headings {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0; /* Added padding for better spacing */
+    text-align: center;
+}
+
+#headings div h3 {
+    font-size: 12px; /* Changed to slightly larger font for readability */
+    margin: 0;
+}
+
+/* Social media and app links */
+#two {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+    align-items: center;
+}
+
+#apps {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px; /* Space between social icons */
+}
+
+#playstore {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    gap: 0px; /* Space between app store icons */
+}
+
+/* Footer bottom section */
+#three {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+#copyright {
+    font-size: 14px; /* Adjusted font size */
+}
+
+#terms {
+    font-size: 14px; /* Adjusted font size */
+}
+
+#terms-link {
+    color: white;
+    text-decoration: none;
+}
+
+#terms-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    #one {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #headings {
+        flex-direction: column;
+        gap: 20px;
+    }
+    #two {
+        flex-direction: column;
+        /* gap: 20px; */
+    }
+    #three {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="#" class="nav-link">BIKE WALA🏍️</a>
+        </div>
+        <div class="navbar-right">
+            <a id="user">user</a>
+            <a href="./bikes.html" class="nav-link" onclick="navigate('home')">Home</a>
+            <a id="x" class="nav-link" onclick="navigate('signup')">Logout</a>
+        </div>
+    </nav>
+    <main id="bikesContainer"></main>
+    <script>
+        const displayname = JSON.parse(localStorage.getItem("loginname"));
+
+          profile=document.getElementById("user")
+          profile.innerHTML=displayname
+          profile.style.text="white";
+
+        const bikesContainer = document.getElementById('bikesContainer');
+        let favBikes = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        
+
+        // Function to save favorites back to localStorage
+        function saveFavorites(favorites) {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+
+        // Function to display bikes
+        function displayBikes(bikes) {
+            bikesContainer.innerHTML = '';
+            if (bikes.length === 0) {
+                bikesContainer.innerHTML = '<p>No favorite bikes found.</p>';
+                return;
+            }
+
+            bikes.forEach((bike, index) => {
+                const bikeCard = document.createElement('div');
+                bikeCard.className = 'bike-card';
+
+                // Default image if bike.Image is not available
+                const bikeImage = bike.Image || 'https://via.placeholder.com/300x200?text=No+Image+Available';
+
+                bikeCard.innerHTML = `
+                    <div class="bike-image">
+                        <img src="${bikeImage}" alt="${bike.name}">
+                    </div>
+                    <div class="bike-details">
+                        <h3>${bike.key}</h3>
+                        <p><strong>Engine Type:</strong> ${bike["Engine Type"] || 'N/A'}</p>
+                        <p><strong>Displacement:</strong> ${bike["Displacement"] || 'N/A'}</p>
+                        <p><strong>Max Power:</strong> ${bike["Max Power"] || 'N/A'}</p>
+                        <p class="price-tag">${bike["price"] || 'N/A'}</p>
+                        <button class="remove-btn" onclick="removeBike(${index})">Remove</button>
+                        <div class="hidden-details" id="${index}-details">
+                            <p>Additional details can be shown here.</p>
+                        </div>
+                    </div>
+                `;
+
+                bikesContainer.appendChild(bikeCard);
+            });
+        }
+
+        // Function to remove bike from favorites
+        function removeBike(index) {
+            if (confirm('Are you sure you want to remove this bike from favorites?')) {
+                favBikes.splice(index, 1); // Remove the bike from the array
+                saveFavorites(favBikes); // Update localStorage
+                displayBikes(favBikes); // Re-display updated list
+            }
+        }
+
+        // Display bikes initially
+        displayBikes(favBikes);
+
+        btn=document.getElementById("x")
+        btn.addEventListener("click",function(){
+            alert("Are you sure you want to LOGOUT");
+            window.location.assign("./login-page.html")
+        })
+    </script>
+<footer class="footer">
+    <div id="one">
+        <a href="https://www.bikewale.com/about-us/" id="first">About Us</a>
+        <a href="#" id="first">Advertise</a>
+    </div>
+    <div id="headings">
+        <div><h3>CONTACT WITH US</h3></div>
+        <div><h3>DOWNLOAD MOBILE APP</h3></div>
+    </div>
+    <div id="two">
+        <div id="apps">
+            <a href="#"><img src="../images/facebook.png" alt="Facebook" width="40"></a>
+            <a href="#"><img src="../images/twitter.png" alt="Twitter" width="40"></a>
+            <a href="#"><img src="../images/youtube.png" alt="YouTube" width="40"></a>
+            <a href="#"><img src="../images/instagram.png" alt="Instagram" width="40"></a>
+        </div>
+        
+        <div id="playstore">
+            <a href="#"><img src="../images/apple.png" alt="Apple Store" width="150" height="50"></a>
+            <a href="#"><img src="../images/appp-removebg-preview.png" alt="Google Play Store" width="130" height="110"></a>
+        </div>
+    </div>
+    <hr>
+    <div id="three">
+        <div id="copyright"><p>Copyright © 2022. All rights reserved.</p></div>
+        <div id="terms"><p><a href="https://www.bikewale.com/visitor-agreement/" id="terms-link">Visitor Agreement & Privacy Policy</a></p></div>
+    </div>
+</footer>
+</body>
+</html>
